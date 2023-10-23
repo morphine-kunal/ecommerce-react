@@ -68,7 +68,7 @@ const DiscountOffers = (props) => {
                       <p className="text-lg flex justify-between">
                         ₹{item.price}{" "}
                         <span className="text-sm text-green-500">
-                          {item.discountPercentage}%
+                          -{item.discountPercentage}%
                         </span>
                       </p>
                     </div>
