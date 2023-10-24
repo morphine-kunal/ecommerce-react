@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
 
 const ProductCard = (props) => {
@@ -5,7 +6,7 @@ const ProductCard = (props) => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("https://dummyjson.com/products/?&limit=10")
+    fetch(`https://dummyjson.com/products/?&limit=10&skip=${props.skip}`)
       .then((res) => {
         if (!res.ok) {
           throw new Error("Error");
@@ -22,7 +23,7 @@ const ProductCard = (props) => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [props.skip]);
 
   if (error) {
     return <div>Error : {error}</div>;
@@ -51,8 +52,13 @@ const ProductCard = (props) => {
             </div>
 
             <div className="w-[90%]">
-              <p className="text-sm">{item.title}</p>
-              <p className="font-bold">₹{item.price}</p>
+              <p className="text-md">{item.title}</p>
+              <p className="text-sm flex justify-between">
+                ₹{item.price}{" "}
+                <span className="text-xs text-green-500">
+                  -{item.discountPercentage}%
+                </span>
+              </p>
             </div>
           </div>
         ))}
