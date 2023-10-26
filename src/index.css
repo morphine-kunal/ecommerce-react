@@ -17,7 +17,7 @@
 
 ::-webkit-scrollbar-thumb {
   background: #000; /* Color of the scrollbar thumb */
-  border-radius: 100%; /* Rounded corners of the thumb (capsule shape) */
+  border-radius: 50px; /* Rounded corners of the thumb (capsule shape) */
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -37,7 +37,8 @@
 
 /* Change the scrollbar track color */
 *::-webkit-scrollbar-track {
-  background: #c30d0d;
+  background: #797878;
+  border-radius: 50px;
 }
 
 /* Hide scrollbar buttons in Firefox */

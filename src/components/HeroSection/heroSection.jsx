@@ -61,7 +61,7 @@ const HeroSection = () => {
           ))}
         </div>
 
-        <div className="col-start-2 col-end-4 bg-gray-500 h-[500px] rounded-lg border-2">
+        <div className="col-start-2 col-end-4 bg-gray-500 h-[300px] md:h-[500px] rounded-lg border-2">
           <img
             src="https://m-cdn.phonearena.com/images/article/149188-wide-two_1200/Galaxy-Z-Flip-5-is-official-Slow-but-steady-evolution.jpg"
             alt="image"
