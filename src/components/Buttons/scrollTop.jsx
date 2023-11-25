@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Arrow from "../../assets/arrow-icon.png";
+import { IoChevronForward } from "react-icons/io5";
 
 const ScrollTop = () => {
   const [showButton, setShowButton] = useState(false);
@@ -27,7 +27,7 @@ const ScrollTop = () => {
           className="fixed bottom-4 right-4 p-2 bg-black text-white rounded-full shadow-md"
           onClick={scrollToTop}
         >
-          <img src={Arrow} alt="arrow" className="bg-white rounded-full rotate-[-90deg]"/>
+          <IoChevronForward className="bg-white rounded-full rotate-[-90deg]"/>
         </button>
       )}
     </div>
