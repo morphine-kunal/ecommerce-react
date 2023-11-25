@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import InTheBasket from "../Buttons/inTheBasket";
-import PointIcon from "../../assets/pointIcon.png";
-import ArrowIcon from "../../assets/arrow-icon.png";
+import { CiLight } from "react-icons/ci";
+import { IoChevronForward } from "react-icons/io5";
 
 const HeroSection = () => {
   const [category, setCategory] = useState([]);
@@ -41,20 +41,12 @@ const HeroSection = () => {
               <div className="flex justify-between items-center cursor-pointer">
                 <div className="flex">
                   <div className="w-5 h-5 mr-2">
-                    <img
-                      src={PointIcon}
-                      alt="categories"
-                      className="w-full h-full"
-                    />
+                    <CiLight className="w-full h-full" />
                   </div>
                   <p className="text-sm">{item}</p>
                 </div>
                 <div className="w-5 h-5">
-                  <img
-                    src={ArrowIcon}
-                    alt="arrow-icon"
-                    className="w-full h-full"
-                  />
+                  <IoChevronForward className="w-full h-full" />
                 </div>
               </div>
             </div>
@@ -79,7 +71,7 @@ const HeroSection = () => {
                 key={item.id}
               >
                 <div className="w-6 h-6">
-                  <img src={PointIcon} alt="icons" className="w-full h-full"/>
+                  <CiLight className="w-full h-full" />
                 </div>
                 <div>
                   <p className="text-[10px] mt-2 ">{item}</p>
