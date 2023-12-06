@@ -6,18 +6,17 @@
 
 @layer base {
   html {
-    font-family: "Montserrat","Playfair Display", sans-serif !important;
+    font-family: "Montserrat", "Playfair Display", sans-serif !important;
   }
 }
 /* For WebKit (Chrome, Safari, and newer Edge) */
 /* For WebKit (Chrome, Safari, and newer Edge) */
 ::-webkit-scrollbar {
-  width: 12px; /* Width of the scrollbar track */
+  width: 2px; /* Width of the scrollbar track */
 }
 
 ::-webkit-scrollbar-thumb {
   background: #000; /* Color of the scrollbar thumb */
-  border-radius: 50px; /* Rounded corners of the thumb (capsule shape) */
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -38,7 +37,6 @@
 /* Change the scrollbar track color */
 *::-webkit-scrollbar-track {
   background: #797878;
-  border-radius: 50px;
 }
 
 /* Hide scrollbar buttons in Firefox */
@@ -50,3 +48,6 @@
 *::-webkit-scrollbar-corner {
   background: #606060;
 }
+
+
+
