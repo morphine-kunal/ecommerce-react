@@ -1,4 +1,3 @@
-import ScrollTop from "../components/Buttons/scrollTop";
 import Footer from "../components/Footer/footer";
 import NavBar from "../components/Header/navBar";
 import HeroSection from "../components/HeroSection/heroSection";
@@ -8,16 +7,19 @@ import Header from "../components/header/header";
 
 const HomePage = () => {
   return (
-    <div>
-      <Header />
-      <NavBar />
-      <HeroSection />
-      <ProductCard title="Leaders of the Week" skip="0" />
-      <DiscountOffers title="Discount Offers" />
-      <ProductCard title="Cosmetics & grooming" skip="10" />
-      <ScrollTop />
-      <Footer />
-    </div>
+    <>
+      <div className="fixed top-0 left-0 w-full">
+        <Header />
+        <NavBar />
+      </div>
+      <div className="mt-32">
+        <HeroSection />
+        <ProductCard title="Leaders of the Week" skip="0" />
+        <DiscountOffers title="Discount Offers" />
+        <ProductCard title="Cosmetics & grooming" skip="10" />
+        <Footer />
+      </div>
+    </>
   );
 };
 
