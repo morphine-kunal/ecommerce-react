@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const ProductCard = (props) => {
   const [product, setProduct] = useState([]);
@@ -28,6 +29,10 @@ const ProductCard = (props) => {
   if (error) {
     return <div>Error : {error}</div>;
   }
+
+  if(!product){
+    return <div className="absolute left[50%] top[50%] font-bold">Loading...</div>;
+  }
   return (
     <>
       <div className="w-[90%] mx-auto mt-5 mb-5 flex justify-between items-center">
@@ -43,23 +48,25 @@ const ProductCard = (props) => {
             key={item.id}
             style={{ minWidth: "160px", overflow: "hidden" }}
           >
-            <div className="w-24 h-24">
-              <img
-                src={item.images[0]}
-                alt="speaker"
-                className="w-full h-full"
-              />
-            </div>
+            <Link to={`/product/${item.id}`}>
+              <div className="w-24 h-24">
+                <img
+                  src={item.images[0]}
+                  alt="speaker"
+                  className="w-full h-full"
+                />
+              </div>
 
-            <div className="w-[90%]">
-              <p className="text-md">{item.title}</p>
-              <p className="text-sm flex justify-between">
-                ₹{item.price}{" "}
-                <span className="text-xs text-green-500">
-                  -{item.discountPercentage}%
-                </span>
-              </p>
-            </div>
+              <div className="w-[90%]">
+                <p className="text-md">{item.title}</p>
+                <p className="text-sm flex justify-between">
+                  ₹{item.price}{" "}
+                  <span className="text-xs text-green-500">
+                    -{item.discountPercentage}%
+                  </span>
+                </p>
+              </div>
+            </Link>
           </div>
         ))}
       </div>
