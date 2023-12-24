@@ -16,27 +16,27 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #000; /* Color of the scrollbar thumb */
+  background: #323232; /* Color of the scrollbar thumb */
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #000; /* Color of the scrollbar thumb on hover */
+  background: #323232; /* Color of the scrollbar thumb on hover */
 }
 
 /* For Firefox */
 * {
   scrollbar-width: thin; /* "auto" or "thin" for the Firefox scrollbar */
-  scrollbar-color: #000 #929292; /* Color of the thumb and the track */
+  scrollbar-color: #323232 #ddd; /* Color of the thumb and the track */
 }
 
 /* Change the thumb color on hover */
 *::-webkit-scrollbar-thumb:active {
-  background: #000;
+  background: #323232;
 }
 
 /* Change the scrollbar track color */
 *::-webkit-scrollbar-track {
-  background: #797878;
+  background: #ddd;
 }
 
 /* Hide scrollbar buttons in Firefox */
@@ -46,7 +46,7 @@
 
 /* Adjust scrollbar corner (the space where two scrollbars meet) in Firefox */
 *::-webkit-scrollbar-corner {
-  background: #606060;
+  background: #ddd;
 }
 
 
