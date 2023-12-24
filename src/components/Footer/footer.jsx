@@ -4,7 +4,7 @@ import cIcon from "../../assets/cIcon.png";
 const Footer = () => {
   return (
     <React.Fragment>
-      <footer className="bg-white py-8 my-8 mb-4">
+      <footer className="bg-white py-8 my-8 mb-4 mt-6 rounded-md">
         <div className="flex w-[90%] mx-auto justify-between flex-col md:flex-row">
           <div>
             <p className="text-sm font-semibold mb-5">Contact</p>

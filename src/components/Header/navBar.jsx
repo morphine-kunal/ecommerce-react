@@ -22,7 +22,7 @@ const NavBar = () => {
           <div className="text-lg text-slate-200"> | </div>
 
           <div className="relative">
-            <div className="absolute text-black text-bold -top-3 -right-2 font-semibold">
+            <div className="absolute text-white text-xs -top-3 -right-3 font-md bg-[#ff003c] rounded px-1">
               5
             </div>
 
