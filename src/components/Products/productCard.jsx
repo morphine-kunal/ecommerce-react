@@ -48,7 +48,7 @@ const ProductCard = (props) => {
             key={item.id}
             style={{ minWidth: "160px", overflow: "hidden" }}
           >
-            <Link to={`/product/${item.id}`}>
+            <Link to={`/product/${item.id}`} target="_blank">
               <div className="w-24 h-24">
                 <img
                   src={item.images[0]}
@@ -57,10 +57,10 @@ const ProductCard = (props) => {
                 />
               </div>
 
-              <div className="w-[90%]">
-                <p className="text-md">{item.title}</p>
-                <p className="text-sm flex justify-between">
-                  ₹{item.price}{" "}
+              <div className="w-[90%] m-auto">
+                <p className="text-md h-[72px]">{item.title}</p>
+                <p className="text-sm flex justify-between items-center mt-3">
+                  ${item.price}{" "}
                   <span className="text-xs text-green-500">
                     -{item.discountPercentage}%
                   </span>

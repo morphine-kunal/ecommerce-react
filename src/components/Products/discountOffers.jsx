@@ -40,28 +40,30 @@ const DiscountOffers = (props) => {
       <div className="flex w-[90%] mx-auto overflow-y-auto gap-4">
         {product.map((item) => (
           <div className=" mt-5 mb-5 bg-white w-[550px]" key={item.id}>
-            <Link to={`/product/${item.id}`}>
-              <div
-                className="flex border rounded-lg"
-                style={{ minWidth: "550px", overflow: "hidden" }}
-              >
-                <div className="w-1/2 h-72">
-                  <img
-                    src={item.images[0]}
-                    alt="watch"
-                    className="w-full h-full"
-                  />
-                </div>
-                <div className="flex justify-evenly items-center flex-col">
+            <div
+              className="flex border rounded-lg"
+              style={{ minWidth: "550px", overflow: "hidden" }}
+            >
+              <div className="w-1/2 h-72">
+                <img
+                  src={item.images[0]}
+                  alt="watch"
+                  className="w-full h-full"
+                />
+              </div>
+              <div className="flex justify-evenly items-center flex-col">
+                <Link to={`/product/${item.id}`} target="_blank">
                   <div className="ml-3">
-                    <p className="text-2xl font-semibold">{item.title}</p>
+                    <p className="text-2xl font-semibold h-[64px]">{item.title}</p>
                   </div>
+                </Link>
 
-                  <div className="flex flex-col w-full">
+                <div className="flex flex-col w-full">
+                  <Link to={`/product/${item.id}`} target="_blank">
                     <div className="flex justify-between items-center w-[90%] mx-auto">
                       <div className="text-start w-full font-semibold text-red-500">
                         <p className="text-gray-400 text-sm line-through">
-                          ₹
+                          $
                           {(
                             item.price /
                             (1 - item.discountPercentage / 100)
@@ -75,13 +77,13 @@ const DiscountOffers = (props) => {
                         </p>
                       </div>
                     </div>
-                    <div className="ml-3 mt-2">
-                      <AddToCart name="Add to Cart" />
-                    </div>
+                  </Link>
+                  <div className="ml-3 mt-2">
+                    <AddToCart name="Add to Cart" />
                   </div>
                 </div>
               </div>
-            </Link>
+            </div>
           </div>
         ))}
       </div>
