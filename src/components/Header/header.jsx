@@ -1,6 +1,5 @@
 // import React from 'react'
 import logo from "../../assets/ZzzzAP.svg";
-
 const Header = () => {
   return (
     <header className="border-b-2  bg-[#FFFFFF]">
@@ -8,9 +7,11 @@ const Header = () => {
         <div className="w-24 h-auto">
           <img src={logo} alt="logo" className="w-full h-full" />
         </div>
-        <div className="flex items-center justify-center rounded-full w-10 h-10 bg-slate-500">
-          
-        </div>
+        <p className="p-2 bg-red-500 text-white font-bold">
+          The project is under construction
+        </p>
+
+        <div className="flex items-center justify-center rounded-full w-10 h-10 bg-slate-500"></div>
       </div>
     </header>
   );
