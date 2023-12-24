@@ -32,6 +32,9 @@ const SearchInput = () => {
 
     return () => clearTimeout(timerId);
   }, [search]);
+  const clickHandler = () =>{
+    setSearch("")
+  }
   return (
     <>
       <div className="md:w-1/2 w-full relative flex justify-between items-center bg-[#F6F6F6] rounded-md p-1">
@@ -44,18 +47,19 @@ const SearchInput = () => {
           <div>
             <input
               type="text"
-              className="w-full p-1 bg-[#F6F6F6] rounded-md text-sm outline-none"
+              className="w-full p-1 bg-[#F6F6F6] rounded-md text-sm outline-none font-medium placeholder:font-thin"
               placeholder="Search"
               onChange={(e) => setSearch(e.target.value)}
               value={search}
               maxLength={20}
               aria-label="Search"
+              style={{ caretColor: "#ff003c" }}
             />
 
             {searchResult.length > 0 && search && (
               <div className="w-full bg-white rounded-md absolute left-0 top-[100%] border-black border-0 shadow-lg cursor-pointer max-h-64 overflow-auto">
                 {searchResult.map((result) => (
-                  <Link key={result.id} to={`/product/${result.id}`}>
+                  <Link key={result.id} to={`/product/${result.id}`} onClick={clickHandler} target="_blank">
                     <div className="flex p-5 items-center">
                       <div className="w-[50px] h-[50px] rounded-full overflow-hidden mr-5">
                         <img
