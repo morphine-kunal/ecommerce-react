@@ -52,7 +52,7 @@ const DiscountOffers = (props) => {
                 />
               </div>
               <div className="flex justify-evenly items-center flex-col">
-                <Link to={`/product/${item.id}`} target="_blank">
+                <Link to={`/product/${item.id}`}>
                   <div className="ml-3">
                     <p className="text-2xl font-semibold h-[64px]">{item.title}</p>
                   </div>
