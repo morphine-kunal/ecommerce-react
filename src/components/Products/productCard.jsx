@@ -48,7 +48,7 @@ const ProductCard = (props) => {
             key={item.id}
             style={{ minWidth: "160px", overflow: "hidden" }}
           >
-            <Link to={`/product/${item.id}`} target="_blank">
+            <Link to={`/product/${item.id}`} >
               <div className="w-24 h-24">
                 <img
                   src={item.images[0]}
