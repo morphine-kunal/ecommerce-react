@@ -59,7 +59,7 @@ const SearchInput = () => {
             {searchResult.length > 0 && search && (
               <div className="w-full bg-white rounded-md absolute left-0 top-[100%] border-black border-0 shadow-lg cursor-pointer max-h-64 overflow-auto">
                 {searchResult.map((result) => (
-                  <Link key={result.id} to={`/product/${result.id}`} onClick={clickHandler} target="_blank">
+                  <Link key={result.id} to={`/product/${result.id}`} onClick={clickHandler}>
                     <div className="flex p-5 items-center">
                       <div className="w-[50px] h-[50px] rounded-full overflow-hidden mr-5">
                         <img
