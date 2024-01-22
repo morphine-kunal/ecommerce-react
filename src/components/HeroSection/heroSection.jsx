@@ -4,10 +4,34 @@ import Loading from "../Buttons/loading";
 import { CiLight } from "react-icons/ci";
 import { IoChevronForward } from "react-icons/io5";
 import { Link } from "react-router-dom";
+import { addToCart } from "../../stores/cartSlice";
+import { useDispatch } from "react-redux";
+import ImageSlider from "./imageSlider";
+
+
+
 
 const HeroSection = () => {
   const [category, setCategory] = useState([]);
   const [error, setError] = useState(null);
+  const [discountOfDay, setDiscountOfDay] = useState([]);
+
+  const generateRandomId = () => {
+    return Math.floor(Math.random() * 100) + 1; // Adjust the range based on your API
+  };
+
+  const fetchRandomProduct = async () => {
+    try {
+      const randomId = generateRandomId();
+      const response = await fetch(
+        `https://dummyjson.com/products/${randomId}`
+      );
+      const data = await response.json();
+      setDiscountOfDay(data);
+    } catch (error) {
+      console.log("Something went wrong", error);
+    }
+  };
 
   useEffect(() => {
     fetch("https://dummyjson.com/products/categories/?&limit=10")
@@ -30,6 +54,22 @@ const HeroSection = () => {
       });
   }, []);
 
+  useEffect(() => {
+    fetchRandomProduct();
+  }, []);
+
+  const updateProductAfter24Hours = () => {
+    // Call fetchRandomProduct again after 24 hours
+    setInterval(() => {
+      fetchRandomProduct();
+    }, 24 * 60 * 60 * 1000); // 24 hours in milliseconds
+  };
+
+  // Initial call to set up the interval
+  useEffect(() => {
+    updateProductAfter24Hours();
+  }, []);
+
   if (!category.length) {
     return (
       <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
@@ -41,6 +81,15 @@ const HeroSection = () => {
   if (error) {
     return <div>Eror: {error}</div>;
   }
+
+  
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const dispatch = useDispatch();
+
+  const handleClick = () => {
+    dispatch(addToCart(discountOfDay));
+  };
 
   return (
     <>
@@ -64,12 +113,13 @@ const HeroSection = () => {
             </div>
           ))}
         </div>
-        <div className="col-start-2 col-end-4 bg-gray-500 h-[300px] md:h-[500px] rounded-lg border-2">
-          <img
+        <div className="col-start-2 col-end-4 bg-gray-500 h-[300px] md:h-[500px] rounded-lg border-2 overflow-hidden">
+          {/* <img
             src="https://m-cdn.phonearena.com/images/article/149188-wide-two_1200/Galaxy-Z-Flip-5-is-official-Slow-but-steady-evolution.jpg"
             alt="image"
             className="w-full h-full object-fill md:object-fill"
-          />
+          /> */}
+          <ImageSlider/>
         </div>
         <div className="md:hidden block">
           <p className="text-lg font-semibold mb-2">Top category</p>
@@ -111,30 +161,39 @@ const HeroSection = () => {
               </div>
             </div>
           </div>
+          {discountOfDay && (
+            <>
+              <div className="py-3">
+                <p className="text-center font-semibold text-sm">
+                  {discountOfDay.title}
+                  
+                </p>
+                <p className="text-center font-semibold mt-1 text-xl">
+                  ${discountOfDay.price}{" "}
+                  <span className="text-gray-400 text-sm ml-3 line-through">
+                    $
+                    {(
+                      discountOfDay.price /
+                      (1 - discountOfDay.discountPercentage / 100)
+                    ).toFixed(2)}
+                  </span>{" "}
+                  <span className="text-green-500 text-xs">
+                    {discountOfDay.discountPercentage}
+                  </span>
+                </p>
+              </div>
+              <div className="w-52 h-52 m-auto">
+                <img
+                  src={discountOfDay.images[0]}
+                  alt="item"
+                  className="w-full h-full"
+                />
+              </div>
+            </>
+          )}
 
-          <div className="py-3">
-            <p className="text-center font-semibold text-sm">
-              Apple Homepod Mini
-              <br /> Space Gray
-            </p>
-            <p className="text-center font-semibold mt-1 text-xl">
-              ₹10,990{" "}
-              <span className="text-gray-400 text-sm ml-3 line-through">
-                ₹12,990
-              </span>{" "}
-              <span className="text-green-500 text-xs">15.40%</span>
-            </p>
-          </div>
-          <div className="w-52 h-52 m-auto">
-            <img
-              src="https://rukminim1.flixcart.com/image/300/300/l2jcccw0/speaker/t/m/k/-original-imagdv2zjmshecrg.jpeg"
-              alt="item"
-              className="w-full h-full"
-            />
-          </div>
-
-          <div className="flex justify-center items-center flex-col">
-            <InTheBasket name="Add to cart" />
+          <div className="flex justify-center items-center flex-col mt-3">
+            <InTheBasket name="Add to cart" onclick={handleClick} />
           </div>
         </div>
       </div>
