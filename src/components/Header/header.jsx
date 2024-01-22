@@ -19,11 +19,11 @@ const Header = () => {
             onClick={clickHandler}
           />
         </div>
-        <p className="p-2 bg-red-500 text-white font-bold">
+        <p className="md:p-2 p-1 bg-red-500 text-white font-bold md:text-sm text-xs">
           The project is under construction
         </p>
 
-        <div className="flex items-center justify-center rounded-full w-10 h-10 bg-slate-500"></div>
+        <div className="flex items-center justify-center rounded-full min-w-10 min-h-10 w-10 h-10 bg-slate-500"></div>
       </div>
     </header>
   );
