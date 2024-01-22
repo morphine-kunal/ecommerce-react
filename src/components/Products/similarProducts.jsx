@@ -20,6 +20,7 @@ const SimilarProducts = ({ category }) => {
             (product) => product.id != id
           );
           setSimilarProduct(filteredProducts);
+          window.scrollTo({ top: 0 });
         }
       })
       .catch((err) => {
@@ -38,7 +39,7 @@ const SimilarProducts = ({ category }) => {
   return (
     <>
       <div className="mt-6">
-        <p className="text-2xl font-semibold">Similar Products</p>
+        <p className="text-lg lg:text-2xl font-semibold">Similar Products</p>
       </div>
       <div className="mt-3 flex gap-4 overflow-y-auto">
         {similarProduct.map((item) => (
