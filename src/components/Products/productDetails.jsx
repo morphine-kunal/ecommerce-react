@@ -24,7 +24,6 @@ const ProductDetails = () => {
         return res.json();
       })
       .then((data) => {
-        console.log(data);
         setProduct(data);
       })
       .catch((err) => {
@@ -50,25 +49,23 @@ const ProductDetails = () => {
 
   return (
     <div className="mt-6">
-      {/* <h1>{product.title}</h1>
-      <p>Price: ₹{product.price}</p>
-      <p>Discount Percentage: {product.discountPercentage}%</p>
-      Add more details as needed */}
-
       <div className="bg-white flex justify-between items-center p-2 rounded-md">
         <p className="text-lg font-semibold">{product.title}</p>
 
-        <div className="flex justify-evenly items-center w-1/5">
+        <div className="flex justify-evenly items-center ">
           <Ratings rating={product.rating} />
           <div className="flex justify-around items-center w-1/5 ">
-            <div onClick={likeHandler} className="w-5 h-5 cursor-pointer">
+            <div
+              onClick={likeHandler}
+              className="md:w-5 md:h-5 w-8 h-8 cursor-pointer"
+            >
               {isLiked ? (
                 <IoHeart className="w-full h-full" />
               ) : (
                 <IoHeartOutline className="w-full h-full" />
               )}
             </div>
-            <IoShareSocialOutline className="w-5 h-5 cursor-pointer" />
+            <IoShareSocialOutline className="md:w-5 md:h-5 w-8 h-8 cursor-pointer" />
           </div>
         </div>
       </div>
@@ -80,6 +77,7 @@ const ProductDetails = () => {
         price={product.price}
         discount={product.discountPercentage}
         category={product.category}
+        id={product.id}
       />
 
       <ProductDescription description={product.description} />
