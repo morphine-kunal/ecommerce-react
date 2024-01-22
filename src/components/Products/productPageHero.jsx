@@ -4,6 +4,9 @@ import { IoCheckmarkOutline, IoCloseOutline } from "react-icons/io5";
 import QuantityButton from "../Buttons/quantityButton";
 import CartBtn from "../Buttons/cartBtn";
 
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../stores/cartSlice";
+
 const ProductPageHero = ({
   images,
   stock,
@@ -11,6 +14,7 @@ const ProductPageHero = ({
   price,
   discount,
   category,
+  id,
 }) => {
   const [selectedImage, setSelectedImage] = useState(0);
 
@@ -18,8 +22,24 @@ const ProductPageHero = ({
     setSelectedImage(index);
   };
 
+  const dispatch = useDispatch();
+
+  const handleClick = () => {
+    const data = {
+      images,
+      stock,
+      brand,
+      price,
+      discount,
+      category,
+      id,
+    };
+    dispatch(addToCart(data));
+    console.log(data);
+  };
+
   return (
-    <div className="grid grid-cols-3 gap-3 mt-3 pb-3">
+    <div className="flex flex-col md:grid md:grid-cols-3 gap-3 mt-3 pb-3">
       <div className="col-start-1 col-end-3 bg-white flex justify-center rounded-md overflow-hidden p-3">
         <div className="mr-3 flex flex-col justify-evenly">
           {images.map((res, index) => (
@@ -127,7 +147,7 @@ const ProductPageHero = ({
         </div>
 
         <div className="mt-6">
-          <CartBtn />
+          <CartBtn addToCart={handleClick} />
         </div>
       </div>
     </div>
