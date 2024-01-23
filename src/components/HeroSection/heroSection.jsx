@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import InTheBasket from "../Buttons/inTheBasket";
 import Loading from "../Buttons/loading";
 import { CiLight } from "react-icons/ci";
@@ -8,13 +8,79 @@ import { addToCart } from "../../stores/cartSlice";
 import { useDispatch } from "react-redux";
 import ImageSlider from "./imageSlider";
 
-
-
-
 const HeroSection = () => {
   const [category, setCategory] = useState([]);
   const [error, setError] = useState(null);
   const [discountOfDay, setDiscountOfDay] = useState([]);
+  const [timer, setTimer] = useState("00:00:00");
+
+  const Ref = useRef(null);
+
+  const getTimeRemaining = (e) => {
+    const total = Date.parse(e) - Date.parse(new Date());
+    const seconds = Math.floor((total / 1000) % 60);
+    const minutes = Math.floor((total / 1000 / 60) % 60);
+    const hours = Math.floor((total / 1000 / 60 / 60) % 24);
+    return {
+      total,
+      hours,
+      minutes,
+      seconds,
+    };
+  };
+
+  const startTimer = (e) => {
+    let { total, hours, minutes, seconds } = getTimeRemaining(e);
+  
+    if (total >= 0) {
+      // update the timer
+      setTimer(
+        (hours > 9 ? hours : "0" + hours) +
+          ":" +
+          (minutes > 9 ? minutes : "0" + minutes) +
+          ":" +
+          (seconds > 9 ? seconds : "0" + seconds)
+      );
+    } else {
+      setTimer("00:00:00");
+    }
+  };
+
+  const clearTimer = (e) => {
+    const initialTime = getTimeRemaining(e);
+    setTimer(
+      (initialTime.hours > 9 ? initialTime.hours : "0" + initialTime.hours) +
+        ":" +
+        (initialTime.minutes > 9
+          ? initialTime.minutes
+          : "0" + initialTime.minutes) +
+        ":" +
+        (initialTime.seconds > 9
+          ? initialTime.seconds
+          : "0" + initialTime.seconds)
+    );
+
+    if (Ref.current) clearInterval(Ref.current);
+    const id = setInterval(() => {
+      startTimer(e);
+    }, 1000);
+    Ref.current = id;
+  };
+
+  const getDeadTime = () => {
+    let deadline = new Date();
+
+    
+    deadline.setHours(deadline.getHours() + 24);
+    deadline.setMinutes(0);
+    deadline.setSeconds(0);
+    return deadline;
+  };
+
+  useEffect(() => {
+    clearTimer(getDeadTime());
+  }, []);
+
 
   const generateRandomId = () => {
     return Math.floor(Math.random() * 100) + 1; // Adjust the range based on your API
@@ -62,7 +128,7 @@ const HeroSection = () => {
     // Call fetchRandomProduct again after 24 hours
     setInterval(() => {
       fetchRandomProduct();
-    }, 24 * 60 * 60 * 1000); // 24 hours in milliseconds
+    }, 24 * 60 * 60 * 1000);
   };
 
   // Initial call to set up the interval
@@ -81,8 +147,6 @@ const HeroSection = () => {
   if (error) {
     return <div>Eror: {error}</div>;
   }
-
-  
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const dispatch = useDispatch();
@@ -119,7 +183,7 @@ const HeroSection = () => {
             alt="image"
             className="w-full h-full object-fill md:object-fill"
           /> */}
-          <ImageSlider/>
+          <ImageSlider />
         </div>
         <div className="md:hidden block">
           <p className="text-lg font-semibold mb-2">Top category</p>
@@ -148,15 +212,17 @@ const HeroSection = () => {
 
             <div className="flex justify-evenly mt-3">
               <div className="flex flex-col">
-                <span className="text-center text-green-500 text-sm">07</span>
+                <span className="text-center text-green-500 text-sm">
+                  {timer.split(":")[0]}
+                </span>
                 <span className="text-sm">hours</span>
               </div>
               <div className="flex flex-col">
-                <span className="text-center text-green-500 text-sm">08</span>
+                <span className="text-center text-green-500 text-sm">{timer.split(":")[1]}</span>
                 <span className="text-sm">mins</span>
               </div>
               <div className="flex flex-col">
-                <span className="text-center text-green-500 text-sm">09</span>
+                <span className="text-center text-green-500 text-sm">{timer.split(":")[2]}</span>
                 <span className="text-sm">sec</span>
               </div>
             </div>
@@ -166,7 +232,6 @@ const HeroSection = () => {
               <div className="py-3">
                 <p className="text-center font-semibold text-sm">
                   {discountOfDay.title}
-                  
                 </p>
                 <p className="text-center font-semibold mt-1 text-xl">
                   ${discountOfDay.price}{" "}

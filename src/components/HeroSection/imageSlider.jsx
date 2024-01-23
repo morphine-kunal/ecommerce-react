@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
-import smartphones from "../../assets/img/smartphones.png";
-import laptops from "../../assets/img/laptops.png";
-import perfume from "../../assets/img/perfume.png";
-import skincare from "../../assets/img/skincare.png";
-import furniture from "../../assets/img/furniture.png";
-import homeDecor from "../../assets/img/homeDecor.png";
+import smartphones from "../../assets/img/smartphones-min.png";
+import laptops from "../../assets/img/laptops-min.png";
+import perfume from "../../assets/img/perfume-min.png";
+import skincare from "../../assets/img/skincare-min.png";
+import furniture from "../../assets/img/furniture-min.png";
+import homeDecor from "../../assets/img/homeDecor-min.png";
 
 import { IoChevronBackOutline, IoChevronForwardOutline } from "react-icons/io5";
+
+import { Link } from "react-router-dom";
 
 const DummyImages = [
   {
@@ -15,23 +17,23 @@ const DummyImages = [
   },
   {
     url: laptops,
-    title: "Laptops",
+    title: "laptops",
   },
   {
     url: perfume,
-    title: "Fragrances",
+    title: "fragrances",
   },
   {
     url: skincare,
-    title: "Skin Care",
+    title: "skincare",
   },
   {
     url: furniture,
-    title: "Furniture",
+    title: "furniture",
   },
   {
     url: homeDecor,
-    title: "Home decor",
+    title: "home-decoration",
   },
 ];
 
@@ -76,14 +78,6 @@ const ImageSlider = () => {
 
   return (
     <div className="relative ">
-      {/* <div className="col-start-2 col-end-4 bg-gray-500 h-[300px] md:h-[500px] rounded-lg border-2">
-        <img
-          src="https://m-cdn.phonearena.com/images/article/149188-wide-two_1200/Galaxy-Z-Flip-5-is-official-Slow-but-steady-evolution.jpg"
-          alt="image"
-          className="w-full h-full object-fill md:object-fill"
-        />
-      </div> */}
-
       <div>
         <button
           onClick={nextSlider}
@@ -97,7 +91,7 @@ const ImageSlider = () => {
           onClick={prevSlider}
           className="absolute text-white z-10  top-[50%] translate-y-[-50%] opacity-20  h-[50px]"
         >
-          <IoChevronBackOutline className="w-full h-full"/>
+          <IoChevronBackOutline className="w-full h-full" />
         </button>
       </div>
       {DummyImages.map((currentSlide, ind) => {
@@ -108,12 +102,14 @@ const ImageSlider = () => {
             }
             key={ind}
           >
-            {ind === activeImageNum && (
-              <img
-                src={currentSlide.url}
-                className="image w-full h-full object-fill"
-              />
-            )}
+            <Link to={`/products/category/${currentSlide.title}`}>
+              {ind === activeImageNum && (
+                <img
+                  src={currentSlide.url}
+                  className="image w-full h-full object-fill"
+                />
+              )}
+            </Link>
           </div>
         );
       })}
