@@ -2,9 +2,18 @@ import React, { useState, useEffect } from "react";
 import AddToCart from "../Buttons/addToCart";
 import { Link } from "react-router-dom";
 
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../stores/cartSlice";
+
 const DiscountOffers = (props) => {
   const [product, setProduct] = useState([]);
   const [error, setError] = useState(null);
+
+  const dispatch = useDispatch();
+
+  const handleClick = () => {
+    dispatch(addToCart(product));
+  };
 
   useEffect(() => {
     fetch("https://dummyjson.com/products/?&limit=10&skip=30")
@@ -54,7 +63,9 @@ const DiscountOffers = (props) => {
               <div className="flex justify-evenly items-center flex-col">
                 <Link to={`/product/${item.id}`}>
                   <div className="ml-3">
-                    <p className="text-2xl font-semibold h-[64px]">{item.title}</p>
+                    <p className="text-2xl font-semibold h-[64px]">
+                      {item.title}
+                    </p>
                   </div>
                 </Link>
 
@@ -70,7 +81,7 @@ const DiscountOffers = (props) => {
                           ).toFixed(2)}
                         </p>
                         <p className="text-lg flex justify-between">
-                          ₹{item.price}{" "}
+                          ${item.price}{" "}
                           <span className="text-sm text-green-500">
                             -{item.discountPercentage}%
                           </span>
@@ -79,7 +90,7 @@ const DiscountOffers = (props) => {
                     </div>
                   </Link>
                   <div className="ml-3 mt-2">
-                    <AddToCart name="Add to Cart" />
+                    <AddToCart name="Add to Cart" click={handleClick} />
                   </div>
                 </div>
               </div>

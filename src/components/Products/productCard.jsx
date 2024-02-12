@@ -30,8 +30,10 @@ const ProductCard = (props) => {
     return <div>Error : {error}</div>;
   }
 
-  if(!product){
-    return <div className="absolute left[50%] top[50%] font-bold">Loading...</div>;
+  if (!product) {
+    return (
+      <div className="absolute left[50%] top[50%] font-bold">Loading...</div>
+    );
   }
   return (
     <>
@@ -48,8 +50,11 @@ const ProductCard = (props) => {
             key={item.id}
             style={{ minWidth: "160px", overflow: "hidden" }}
           >
-            <Link to={`/product/${item.id}`} >
-              <div className="w-24 h-24">
+            <Link
+              to={`/product/${item.id}`}
+              className="flex justify-center items-center flex-col w-full"
+            >
+              <div className="w-24 h-24 flex justify-center">
                 <img
                   src={item.images[0]}
                   alt="speaker"
@@ -58,10 +63,14 @@ const ProductCard = (props) => {
               </div>
 
               <div className="w-[90%] m-auto">
-                <p className="text-md h-[72px]">{item.title}</p>
-                <p className="text-sm flex justify-between items-center mt-3">
+                <p className="text-sm w-full font-medium h-[42px] text-start text-[#323232] mt-2">
+                  {item.title}
+                </p>
+              </div>
+              <div className="flex justify-between items-center w-[100%] px-2">
+                <p className="text-sm flex justify-between items-center mt-3 font-semibold w-full">
                   ${item.price}{" "}
-                  <span className="text-xs text-green-500">
+                  <span className="text-xs text-slate-500 font-thin">
                     -{item.discountPercentage}%
                   </span>
                 </p>

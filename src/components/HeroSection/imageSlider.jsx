@@ -77,7 +77,7 @@ const ImageSlider = () => {
   }
 
   return (
-    <div className="relative ">
+    <div className="relative h-[300px] md:h-[500px]">
       <div>
         <button
           onClick={nextSlider}

@@ -147,7 +147,7 @@ const ProductPageHero = ({
         </div>
 
         <div className="mt-6">
-          <CartBtn addToCart={handleClick} />
+          <CartBtn addToCart={handleClick} name='Add to cart'/>
         </div>
       </div>
     </div>

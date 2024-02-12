@@ -1,6 +1,7 @@
 // import React from 'react'
 import { useNavigate } from "react-router-dom";
 import logo from "../../assets/ZzzzAP.svg";
+import LoginSignupBtn from "../Buttons/loginSignupBtn";
 const Header = () => {
   const history = useNavigate();
 
@@ -19,11 +20,13 @@ const Header = () => {
             onClick={clickHandler}
           />
         </div>
-        <p className="md:p-2 p-1 bg-red-500 text-white font-bold md:text-sm text-xs">
+        <marquee className="text-black font-bold md:text-sm text-xs absolute left-0 top-0">
           The project is under construction
-        </p>
+        </marquee>
 
-        <div className="flex items-center justify-center rounded-full min-w-10 min-h-10 w-10 h-10 bg-slate-500"></div>
+        <div className="flex items-center justify-center rounded-full ">
+          <LoginSignupBtn />
+        </div>
       </div>
     </header>
   );

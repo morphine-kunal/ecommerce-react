@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 // import React from 'react'
 import { IoCartOutline } from "react-icons/io5";
 
@@ -9,9 +10,10 @@ const CartBtn = (props) => {
       onClick={props.addToCart}
     >
       <span className="w-5 h-5 mr-2">
-        <IoCartOutline className="w-5 h-5" />
+      
+          <IoCartOutline className="w-5 h-5" />
       </span>
-      <p>Add to cart</p>
+      <p>{props.name}</p>
     </button>
   );
 };
