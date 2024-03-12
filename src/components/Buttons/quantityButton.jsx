@@ -1,9 +1,8 @@
-import { useState } from "react";
 import { IoRemove, IoAdd } from "react-icons/io5";
 
-const QuantityButton = () => {
-  const [quantity, setQuantity] = useState(1);
-
+// eslint-disable-next-line react/prop-types
+const QuantityButton = ({ quantity, setQuantity}) => {
+//
   const handleAdd = () => {
     setQuantity((prev) => prev + 1);
   };

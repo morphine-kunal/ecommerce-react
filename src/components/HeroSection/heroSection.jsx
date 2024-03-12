@@ -28,6 +28,8 @@ const HeroSection = () => {
       seconds,
     };
   };
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const dispatch = useDispatch();
 
   const startTimer = (e) => {
     let { total, hours, minutes, seconds } = getTimeRemaining(e);
@@ -105,12 +107,14 @@ const HeroSection = () => {
         if (!res.ok) {
           throw new Error("Error");
         }
+        console.log('fetched')
         return res.json();
       })
       .then((data) => {
         if (Array.isArray(data)) {
           const catagories = data.slice(0, 11);
           setCategory(catagories);
+          console.log("Loaded")
         } else {
           setError("Unexpected data format.");
         }
@@ -118,12 +122,13 @@ const HeroSection = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, []); // Empty dependency array for mounting
 
   useEffect(() => {
     fetchRandomProduct();
-  }, []);
+  }, []); // Empty dependency array for mounting
 
+  
   const updateProductAfter24Hours = () => {
     // Call fetchRandomProduct again after 24 hours
     setInterval(() => {
@@ -148,8 +153,7 @@ const HeroSection = () => {
     return <div>Eror: {error}</div>;
   }
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const dispatch = useDispatch();
+  
 
   const handleClick = () => {
     dispatch(addToCart(discountOfDay));

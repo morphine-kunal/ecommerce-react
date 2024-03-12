@@ -24,11 +24,12 @@ const checkboxOptions = [
   { label: "Rating 4 & above", value: "option4" },
 ];
 
-const SideBar = ({ brands }) => {
+const SideBar = ({ brands, filters, setFilters }) => {
   const [showOptions, setShowOptions] = useState(null);
-  const [priceRange, setPriceRange] = useState([0, 100]);
+  const [priceRange, setPriceRange] = useState(0);
   const [inputs, setInputs] = useState({});
   const [brand, setBrand] = useState([]);
+  const [selectedOption, setSelectedOption] = useState("");
 
   const toggleVisibility = (index) => {
     setShowOptions((prevVisibleDiv) =>
@@ -62,11 +63,23 @@ const SideBar = ({ brands }) => {
       [option.value]: checked,
       priceRange,
     }));
+    if (checked) {
+      setSelectedOption(option.value);
+    } else if (selectedOption === option.value) {
+      setSelectedOption("");
+    }
   };
 
   const handleApplyBtn = () => {
-    console.log(inputs);
-    // setInputs({});
+    const updatedFilters = {
+      ...filters,
+      price: priceRange,
+      brand: Object.keys(inputs.brands),
+      ratings: selectedOption,
+      // Add other filters as needed
+    };
+    setFilters(updatedFilters);
+    // console.log("Applying Filters:", updatedFilters);
   };
   useEffect(() => {
     setBrand(brands);
@@ -98,14 +111,14 @@ const SideBar = ({ brands }) => {
                   <>
                     <Slider
                       min={0}
-                      max={100}
-                      range
+                      max={1000}
+                      
                       value={priceRange}
                       onChange={handlePriceChange}
                     />
                     <div className="flex justify-between items-center text-xs mx-1 ">
-                      <p>${priceRange[0]}</p>
-                      <p>${priceRange[1]}</p>
+                      <p>$0</p>
+                      <p>${priceRange}</p>
                     </div>
                   </>
                 ) : item.name === "Rating" ? (

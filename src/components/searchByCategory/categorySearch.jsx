@@ -15,7 +15,6 @@ const CategorySearch = ({setBrands}) => {
         return res.json();
       })
       .then((data) => {
-        console.log(data.products);
         setProduct(data.products);
       })
       .catch((err) => {

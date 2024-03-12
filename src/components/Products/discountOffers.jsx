@@ -50,7 +50,7 @@ const DiscountOffers = (props) => {
         {product.map((item) => (
           <div className=" mt-5 mb-5 bg-white w-[550px]" key={item.id}>
             <div
-              className="flex border rounded-lg"
+              className="flex border rounded-lg p-3"
               style={{ minWidth: "550px", overflow: "hidden" }}
             >
               <div className="w-1/2 h-72">

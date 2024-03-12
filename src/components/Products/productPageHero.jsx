@@ -14,9 +14,11 @@ const ProductPageHero = ({
   price,
   discount,
   category,
+  title,
   id,
 }) => {
   const [selectedImage, setSelectedImage] = useState(0);
+  const [quantity, setQuantity] = useState(1);
 
   const clickHandler = (index) => {
     setSelectedImage(index);
@@ -24,15 +26,13 @@ const ProductPageHero = ({
 
   const dispatch = useDispatch();
 
-  const handleClick = () => {
+  const handleAddCartClick = () => {
     const data = {
-      images,
-      stock,
-      brand,
-      price,
-      discount,
-      category,
       id,
+      quantity,
+      images,
+      price,
+      title,
     };
     dispatch(addToCart(data));
     console.log(data);
@@ -99,7 +99,7 @@ const ProductPageHero = ({
           </div>
         </div>
         <div className="mt-6">
-          <QuantityButton />
+          <QuantityButton quantity={quantity} setQuantity={setQuantity}/>
         </div>
 
         <div className="mt-6">
@@ -147,7 +147,7 @@ const ProductPageHero = ({
         </div>
 
         <div className="mt-6">
-          <CartBtn addToCart={handleClick} name='Add to cart'/>
+          <CartBtn addToCart={handleAddCartClick} name='Add to cart'/>
         </div>
       </div>
     </div>

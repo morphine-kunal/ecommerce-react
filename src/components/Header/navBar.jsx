@@ -6,13 +6,17 @@ import {
 } from "react-icons/io5";
 import SearchInput from "../searchInput";
 import { useSelector } from "react-redux";
-import { selectCartItemsCount } from "../../stores/store";
-import { useParams, useNavigate } from "react-router-dom";
-const NavBar = () => {
-  const cartItemCount = useSelector(selectCartItemsCount);
-  const { id } = useParams();
+import { selectCartItemsCount, selectFavItemsCount } from "../../stores/store";
+import { useParams, useNavigate, Link } from "react-router-dom";
 
-  console.log(id);
+// eslint-disable-next-line react/prop-types
+const NavBar = ({shwoBack}) => {
+  const cartItemCount = useSelector(selectCartItemsCount);
+  const favItemCount = useSelector(selectFavItemsCount);
+  const { id } = useParams();
+  const {name} = useParams();
+
+  // console.log(id);
   const history = useNavigate();
   const handleBack = () => {
     history(-1);
@@ -21,15 +25,15 @@ const NavBar = () => {
   return (
     <nav className="bg-[#FFFFFF]">
       <div className="w-[90%] mx-auto bg-[#FFFFFF] h-14 flex justify-between items-center px-3">
-        {id ? (
+        {id || name || shwoBack ? (
           <div
-            className="flex justify-center items-center underline cursor-pointer"
+            className="flex justify-center items-center underline cursor-pointer mr-2"
             onClick={handleBack}
           >
             <span>
               <IoChevronBack />
             </span>
-            <p className="text-sm">Back</p>
+            <p className="text-xs md:text-sm">Back</p>
           </div>
         ) : (
           <div className="flex justify-center items-center">
@@ -43,8 +47,11 @@ const NavBar = () => {
         <SearchInput />
 
         <div className="flex justify-between items-center w-14">
-          <div className="w-5 h-5 cursor-pointer">
-            <IoHeartOutline className="w-full h-full" />
+          <div className="relative">
+            {favItemCount > 0 && (
+              <div className="absolute top-0.95 right-0.5 bg-[#ff003c] text-white text-xs font-medium rounded-full w-1.5 h-1.5 flex items-center justify-center"></div>
+            )}
+            <IoHeartOutline className="w-5 h-5 cursor-pointer" />
           </div>
 
           <div className="text-lg text-slate-200"> | </div>
@@ -55,10 +62,11 @@ const NavBar = () => {
                 {cartItemCount}
               </div>
             )}
-
-            <div className="w-5 h-5 cursor-pointer">
-              <IoCartOutline className="w-full h-full" />
-            </div>
+            <Link to={"/profile/cart"}>
+              <div className="w-5 h-5 cursor-pointer">
+                <IoCartOutline className="w-full h-full" />
+              </div>
+            </Link>
           </div>
         </div>
       </div>
