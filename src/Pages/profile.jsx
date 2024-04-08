@@ -14,22 +14,22 @@ const options = [
   {
     name: "Profile",
     icon: <IoPersonOutline className="w-full h-full" />,
-    path: '/'
+    path: 'account',
   },
   {
     name: "Cart",
     icon: <IoCartOutline className="w-full h-full" />,
-    path: 'cart'
+    path: 'cart',
   },
   {
     name: "Wishlist",
     icon: <IoHeartOutline className="w-full h-full" />,
-    path: 'wishlist'
+    path: 'wishlist',
   },
   {
     name: "Logout",
     icon: <IoLogOutOutline className="w-full h-full" />,
-    path: '/'
+    // path: '/logout'
   },
 ];
 
@@ -52,7 +52,7 @@ const Profile = () => {
           />
         </div>
 
-        <div className="mt-5 grid grid-flow-row-dense grid-cols-4 gap-x-2">
+        <div className="mt-5 grid grid-flow-row-dense grid-cols-4 gap-x-2"> 
           <div>
             <div className="bg-white rounded-lg">
               <ul>

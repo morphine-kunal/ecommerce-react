@@ -10,11 +10,11 @@ import { selectCartItemsCount, selectFavItemsCount } from "../../stores/store";
 import { useParams, useNavigate, Link } from "react-router-dom";
 
 // eslint-disable-next-line react/prop-types
-const NavBar = ({shwoBack}) => {
+const NavBar = ({ shwoBack }) => {
   const cartItemCount = useSelector(selectCartItemsCount);
   const favItemCount = useSelector(selectFavItemsCount);
   const { id } = useParams();
-  const {name} = useParams();
+  const { name } = useParams();
 
   // console.log(id);
   const history = useNavigate();
@@ -51,7 +51,9 @@ const NavBar = ({shwoBack}) => {
             {favItemCount > 0 && (
               <div className="absolute top-0.95 right-0.5 bg-[#ff003c] text-white text-xs font-medium rounded-full w-1.5 h-1.5 flex items-center justify-center"></div>
             )}
-            <IoHeartOutline className="w-5 h-5 cursor-pointer" />
+            <Link to={'/profile/wishlist'}>
+              <IoHeartOutline className="w-5 h-5 cursor-pointer" />
+            </Link>
           </div>
 
           <div className="text-lg text-slate-200"> | </div>

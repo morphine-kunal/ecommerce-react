@@ -7,7 +7,7 @@ import ProductPageHero from "./productPageHero";
 import { IoHeart, IoHeartOutline, IoShareSocialOutline } from "react-icons/io5";
 import ProductDescription from "./productDescription";
 import SimilarProducts from "./similarProducts";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addToFav, removeFromFav } from "../../stores/favSlice";
 
 // eslint-disable-next-line react/prop-types
@@ -17,6 +17,9 @@ const ProductDetails = () => {
   const [isLiked, setIsLiked] = useState(false);
 
   const { id } = useParams();
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const dispatch = useDispatch();
+  const wishlistitem = useSelector((state) => state.favItem.items);
 
   useEffect(() => {
     fetch(`https://dummyjson.com/product/${id}`)
@@ -34,6 +37,13 @@ const ProductDetails = () => {
       });
   }, [id]);
 
+  useEffect(() => {
+    if (product) {
+      const isInWishlist = wishlistitem.some((item) => item.id === product.id);
+      setIsLiked(isInWishlist);
+    }
+  }, [wishlistitem, product]);
+
   if (error) {
     return <div>Error: {error}</div>;
   }
@@ -46,20 +56,20 @@ const ProductDetails = () => {
     );
   }
 
-  const likeHandler = () => {
+  const handleToggleFav = () => {
+    if (isLiked) {
+      dispatch(removeFromFav(product.id));
+    } else {
+      const data = {
+        id: product.id,
+        title: product.title,
+        price: product.price,
+        images: product.images,
+        discount: product.discountPercentage,
+      };
+      dispatch(addToFav(data));
+    }
     setIsLiked((prev) => !prev);
-  };
-
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const dispatch = useDispatch();
-
-  const handleAddFav = (dataId) => {
-    
-    dispatch(addToFav(dataId));
-  };
-
-  const handleRemoveFav = (dataId) => {
-    dispatch(removeFromFav(dataId));
   };
 
   return (
@@ -71,16 +81,13 @@ const ProductDetails = () => {
           <Ratings rating={product.rating} />
           <div className="flex justify-around items-center w-1/5 ">
             <div
-              onClick={likeHandler}
+              onClick={handleToggleFav}
               className="md:w-7 md:h-7 w-8 h-8 cursor-pointer"
             >
               {isLiked ? (
-                <IoHeart className="w-full h-full" onClick={() => handleRemoveFav(product.id)} />
+                <IoHeart className="w-full h-full" />
               ) : (
-                <IoHeartOutline
-                  className="w-full h-full"
-                  onClick={() => handleAddFav(product.id)}
-                />
+                <IoHeartOutline className="w-full h-full" />
               )}
             </div>
             <IoShareSocialOutline className="md:w-7 md:h-7 w-8 h-8 cursor-pointer" />

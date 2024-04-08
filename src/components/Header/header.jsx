@@ -1,5 +1,5 @@
 // import React from 'react'
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/ZzzzAP.svg";
 import LoginSignupBtn from "../Buttons/loginSignupBtn";
 const Header = () => {
@@ -24,9 +24,11 @@ const Header = () => {
           The project is under construction
         </marquee>
 
-        <div className="flex items-center justify-center rounded-full ">
-          <LoginSignupBtn />
-        </div>
+        <Link to={'/profile/account'}>
+          <div className="flex items-center justify-center rounded-full ">
+            <LoginSignupBtn />
+          </div>
+        </Link>
       </div>
     </header>
   );

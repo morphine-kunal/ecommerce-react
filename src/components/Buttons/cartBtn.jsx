@@ -10,8 +10,7 @@ const CartBtn = (props) => {
       onClick={props.addToCart}
     >
       <span className="w-5 h-5 mr-2">
-      
-          <IoCartOutline className="w-5 h-5" />
+        {props.icon ? "" : <IoCartOutline className="w-5 h-5" />}
       </span>
       <p>{props.name}</p>
     </button>
