@@ -18,10 +18,10 @@ const dummyFilters = [
 ];
 
 const checkboxOptions = [
-  { label: "Rating 1 & above", value: "option1" },
-  { label: "Rating 2 & above", value: "option2" },
-  { label: "Rating 3 & above", value: "option3" },
-  { label: "Rating 4 & above", value: "option4" },
+  { label: "Rating 1 & above", value: "1" },
+  { label: "Rating 2 & above", value: "2" },
+  { label: "Rating 3 & above", value: "3" },
+  { label: "Rating 4 & above", value: "4" },
 ];
 
 const SideBar = ({ brands, filters, setFilters }) => {
@@ -30,6 +30,7 @@ const SideBar = ({ brands, filters, setFilters }) => {
   const [inputs, setInputs] = useState({});
   const [brand, setBrand] = useState([]);
   const [selectedOption, setSelectedOption] = useState("");
+  // const [ratingFilter, setRatingFilter] = useState([])
 
   const toggleVisibility = (index) => {
     setShowOptions((prevVisibleDiv) =>
@@ -71,10 +72,11 @@ const SideBar = ({ brands, filters, setFilters }) => {
   };
 
   const handleApplyBtn = () => {
+    let len = brands.legth -1
     const updatedFilters = {
       ...filters,
       price: priceRange,
-      brand: Object.keys(inputs.brands),
+      brand: (inputs.brands)?Object.keys(inputs.brands).filter((brands, index) => index > len): '',
       ratings: selectedOption,
       // Add other filters as needed
     };
@@ -111,8 +113,7 @@ const SideBar = ({ brands, filters, setFilters }) => {
                   <>
                     <Slider
                       min={0}
-                      max={1000}
-                      
+                      max={2000}
                       value={priceRange}
                       onChange={handlePriceChange}
                     />

@@ -4,7 +4,7 @@ import Header from "../components/Header/header";
 import NavBar from "../components/Header/navBar";
 import CategorySearch from "../components/searchByCategory/categorySearch";
 import { useParams } from "react-router-dom";
-import { IoChevronForward, IoHomeSharp, IoChevronDown, IoFilter } from "react-icons/io5";
+import { IoChevronForward, IoHomeSharp, IoFilter } from "react-icons/io5";
 import SideBar from "../components/searchByCategory/sideBar";
 
 
@@ -45,11 +45,11 @@ const CategoryHomepage = () => {
           {/* <span className="font-medium text-sm">({product.length})</span> */}
         </div>
 
-        <div className="bg-white grid grid-cols-2 gap-2 mt-1 px-7 py-2 md:hidden place-items-center">
-          <button className="bg-gray-200 text-sm w-full h-[35px] rounded-sm flex justify-around items-center">
+        <div className="bg-white grid grid-cols-1 gap-2 mt-1 px-7 py-2 md:hidden place-items-center">
+          {/* <button className="bg-gray-200 text-sm w-full h-[35px] rounded-sm flex justify-around items-center">
             <span>New</span> <span><IoChevronDown/></span>
-          </button>
-          <button className="bg-gray-200 text-sm w-full h-[35px] rounded-sm flex justify-center items-center">
+          </button> */}
+          <button className="bg-gray-200 text-sm w-full h-[40px] rounded-md flex justify-center items-center">
             <span><IoFilter/></span><span>Filter</span>
           </button>
         </div>

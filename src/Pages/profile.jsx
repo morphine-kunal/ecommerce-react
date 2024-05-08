@@ -14,17 +14,17 @@ const options = [
   {
     name: "Profile",
     icon: <IoPersonOutline className="w-full h-full" />,
-    path: 'account',
+    path: "account",
   },
   {
     name: "Cart",
     icon: <IoCartOutline className="w-full h-full" />,
-    path: 'cart',
+    path: "cart",
   },
   {
     name: "Wishlist",
     icon: <IoHeartOutline className="w-full h-full" />,
-    path: 'wishlist',
+    path: "wishlist",
   },
   {
     name: "Logout",
@@ -34,13 +34,13 @@ const options = [
 ];
 
 const Profile = () => {
-    const location = useLocation();
+  const location = useLocation();
   const currentPath = location.pathname.split("/").pop();
   return (
     <>
       <div className="fixed top-0 left-0 w-full z-50">
         <Header />
-        <NavBar shwoBack={true}/>
+        <NavBar shwoBack={true} />
       </div>
 
       <div className="w-[90%] m-auto mt-32">
@@ -52,15 +52,17 @@ const Profile = () => {
           />
         </div>
 
-        <div className="mt-5 grid grid-flow-row-dense grid-cols-4 gap-x-2"> 
+        <div className="mt-5 grid grid-flow-row-dense lg:grid-cols-4 grid-rows-1 gap-x-2">
           <div>
-            <div className="bg-white rounded-lg">
-              <ul>
+            <div className="bg-white rounded-lg ">
+              <ul className="lg:block flex justify-around">
                 {options.map((option, index) => (
                   <Link key={index} to={`/profile/${option.path}`}>
-                    <li  className={`p-2 cursor-pointer font-medium flex items-center gap-2 ${
+                    <li
+                      className={`p-2 cursor-pointer font-medium flex items-center gap-2 ${
                         option.path === currentPath && "text-[#FF003C]"
-                      }`}>
+                      }`}
+                    >
                       <span className="w-5 h-5">{option.icon}</span>
                       <span>{option.name}</span>
                     </li>
@@ -69,8 +71,8 @@ const Profile = () => {
               </ul>
             </div>
           </div>
-          <div className="col-span-3">
-            <Outlet/>
+          <div className="lg:col-span-3 row-sapn-1 mt-5 lg:mt-0">
+            <Outlet />
           </div>
         </div>
       </div>

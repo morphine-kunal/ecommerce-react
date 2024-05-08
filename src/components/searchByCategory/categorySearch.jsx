@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import Loading from "../Buttons/loading";
 
-const CategorySearch = ({setBrands}) => {
+const CategorySearch = ({ setBrands, filters }) => {
   const [product, setProduct] = useState([]);
   const { id } = useParams();
   useEffect(() => {
@@ -23,15 +23,28 @@ const CategorySearch = ({setBrands}) => {
   }, [id]);
 
   useEffect(() => {
-
     let brand = [];
     product.forEach((ite) => {
-      brand.push(ite.brand)
-    })
-  
+      brand.push(ite.brand);
+    });
+
     // eslint-disable-next-line react/prop-types
-    setBrands(brand)
-  },[product, setBrands])
+    setBrands(brand);
+  }, [product, setBrands, filters]);
+
+  const filteredProducts = product.filter((item) => {
+    return (
+      (!filters.price ||
+        (item.price <= filters.price)) &&
+      (!filters.brand || filters.brand.includes(item.brand)) &&
+      (!filters.ratings || filters.ratings <= item.rating) &&
+      true
+    );
+  });
+
+  useEffect(() => {
+    console.log(filteredProducts);
+  }, [filteredProducts]);
 
   if (!product.length) {
     return (
@@ -41,14 +54,10 @@ const CategorySearch = ({setBrands}) => {
     );
   }
 
-  
-
-
-
   return (
     <div className="text-xl font-bold w-[90%] mx-auto pb-2">
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
-        {product.map((item) => (
+        {filteredProducts.map((item) => (
           <Link key={item.id} to={`/product/${item.id}`}>
             <div className="lg:w-[250px] bg-white p-4 rounded-md mt-2">
               <div className="flex justify-center items-center mb-3">

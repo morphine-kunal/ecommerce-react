@@ -8,7 +8,7 @@ const cartSlice = createSlice({
   },
   reducers: {
     addToCart: (state, action) => {
-      const { id, quantity, price } = action.payload;
+      const { id, quantity = 1, price } = action.payload;
       const existingProductIndex = state.items.findIndex((item) => item.id === id);
       if (existingProductIndex !== -1) {
         state.items[existingProductIndex].quantity += quantity;
@@ -18,9 +18,13 @@ const cartSlice = createSlice({
       state.totalPrice += quantity * price;
     },
     removeFromCart: (state, action) => {
-      const { id, quantity, price } = action.payload;
-      state.items = state.items.filter((item) => item.id !== id);
-      state.totalPrice -= quantity * price;
+      const { id } = action.payload;
+      const itemIndex = state.items.findIndex((item) => item.id === id);
+      if (itemIndex !== -1) {
+        const { quantity, price } = state.items[itemIndex];
+        state.items.splice(itemIndex, 1); // Remove the item from the array
+        state.totalPrice -= quantity * price; // Update total price
+      }
     },
   },
 });

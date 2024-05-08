@@ -1,4 +1,4 @@
-import {useMemo} from 'react'
+import { useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { IoCloseOutline } from "react-icons/io5";
 import { removeFromCart } from "../../stores/cartSlice";
@@ -27,8 +27,8 @@ const CartView = () => {
   }
   return (
     <>
-      <div className="flex w-full">
-        <div className="w-8/12">
+      <div className="flex lg:flex-row flex-col w-full">
+        <div className="lg:w-8/12 w-full">
           {memoizedCartItems.map((item, index) => (
             <div className="bg-white rounded-md flex flex-col" key={index}>
               <div>
@@ -50,7 +50,7 @@ const CartView = () => {
                       <p className="text-gray-500 font-thin">
                         <span className="text-xs text-center">Quantity:</span>
                         &nbsp;
-                        {item.quantity}
+                        {item.quantity ? item.quantity : 1}
                       </p>
                       <p className="font-semibold text-lg">${item.price}</p>
 
@@ -67,7 +67,7 @@ const CartView = () => {
             </div>
           ))}
         </div>
-        <div className="bg-white rounded-md ml-3 p-5 w-[34%] min-h-[300px] relative">
+        <div className="bg-white rounded-md lg:ml-3 ml-0 p-5 lg:w-[34%] w-full min-h-[300px] relative lg:mt-0 mt-5">
           <div className="flex justify-between items-center w-full border-b-[1px]">
             <span className="text-medium font-semibold">Product</span>{" "}
             <span className="font-regular text-xs text-gray-400">
@@ -83,10 +83,10 @@ const CartView = () => {
                 <div className="text-sm font-medium">{item.title}</div>
                 <div className="flex justify-between items-center">
                   <span className="text-xs font-thin text-gray-400">
-                    ${item.price} x {item.quantity}
+                    ${item.price} x {item.quantity ? item.quantity : 1}
                   </span>
                   <span className="ml-2 text-sm font-medium">
-                    ${item.price * item.quantity}
+                    ${item.price * (item.quantity ? item.quantity : 1)}
                   </span>
                 </div>
               </div>
@@ -95,7 +95,8 @@ const CartView = () => {
 
           <div className="absolute bottom-3 w-[90%] m-auto ">
             <div className="flex justify-between items-center mb-4">
-              <span className="text-lg font-medium">Totao Amount :</span> <span className="text-lg font-medium">${memoizedTotalPrice}</span>
+              <span className="text-lg font-medium">Tota Amount :</span>{" "}
+              <span className="text-lg font-medium">${memoizedTotalPrice}</span>
             </div>
             <CartBtn icon={true} name="Checkout" />
           </div>
