@@ -70,7 +70,7 @@ const DiscountOffers = (props) => {
                 </Link>
 
                 <div className="flex flex-col w-full">
-                  <Link to={`/product/${item.id}`} target="_blank">
+                  <Link to={`/product/${item.id}`}>
                     <div className="flex justify-between items-center w-[90%] mx-auto">
                       <div className="text-start w-full font-semibold text-red-500">
                         <p className="text-gray-400 text-sm line-through">
@@ -90,7 +90,11 @@ const DiscountOffers = (props) => {
                     </div>
                   </Link>
                   <div className="ml-3 mt-2">
-                    <AddToCart name="Add to Cart" click={handleClick} />
+                    <AddToCart
+                      name="Add to Cart"
+                      click={handleClick}
+                      Disable={item.stock < 1}
+                    />
                   </div>
                 </div>
               </div>

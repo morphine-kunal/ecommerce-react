@@ -99,7 +99,7 @@ const ProductPageHero = ({
           </div>
         </div>
         <div className="mt-6">
-          <QuantityButton quantity={quantity} setQuantity={setQuantity}/>
+          <QuantityButton quantity={quantity} setQuantity={setQuantity} />
         </div>
 
         <div className="mt-6">
@@ -147,7 +147,11 @@ const ProductPageHero = ({
         </div>
 
         <div className="mt-6">
-          <CartBtn addToCart={handleAddCartClick} name='Add to cart'/>
+          <CartBtn
+            Click={handleAddCartClick}
+            name="Add to Cart"
+            Disable={stock < 1}
+          />
         </div>
       </div>
     </div>

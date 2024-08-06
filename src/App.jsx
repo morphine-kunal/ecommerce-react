@@ -7,7 +7,7 @@ import Profile from "./Pages/profile";
 import CartView from "./components/Profile/cartView";
 import WishListView from "./components/Profile/wishListView";
 import ProfileView from "./components/Profile/profileView";
-
+import CheckoutPage from "./Pages/checkoutPage";
 
 function App() {
   return (
@@ -21,6 +21,7 @@ function App() {
           <Route path="/profile/:name" Component={CartView} />
           <Route path="/profile/wishlist" Component={WishListView} />
         </Route>
+        <Route path="/cart/checkout" Component={CheckoutPage} />
       </Routes>
     </div>
   );

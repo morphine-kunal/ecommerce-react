@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { IoCloseOutline } from "react-icons/io5";
 import { removeFromCart } from "../../stores/cartSlice";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import CartBtn from "../Buttons/cartBtn";
 
 const CartView = () => {
@@ -13,6 +13,7 @@ const CartView = () => {
   const memoizedTotalPrice = useMemo(() => cartTotalPrice, [cartTotalPrice]);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleDelete = (itemId) => {
     dispatch(removeFromCart({ id: itemId }));
@@ -80,9 +81,9 @@ const CartView = () => {
                 key={index}
                 className="flex justify-between items-center py-4"
               >
-                <div className="text-sm font-medium">{item.title}</div>
+                <div className="text-xs font-medium">{item.title}</div>
                 <div className="flex justify-between items-center">
-                  <span className="text-xs font-thin text-gray-400">
+                  <span className="text-[0.5rem] font-thin text-gray-400">
                     ${item.price} x {item.quantity ? item.quantity : 1}
                   </span>
                   <span className="ml-2 text-sm font-medium">
@@ -98,7 +99,11 @@ const CartView = () => {
               <span className="text-lg font-medium">Tota Amount :</span>{" "}
               <span className="text-lg font-medium">${memoizedTotalPrice}</span>
             </div>
-            <CartBtn icon={true} name="Checkout" />
+            <CartBtn
+              icon={true}
+              name="Checkout"
+              Click={() => navigate("/cart/checkout")}
+            />
           </div>
         </div>
       </div>
