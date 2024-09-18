@@ -90,5 +90,13 @@
   transition-duration: 0.5s;
   transform: scale(1.2);
 }
-h2 {text-align: center;}
+h2 {
+  text-align: center;
+}
 
+@media (max-width: 400px) {
+  .rodal-dialog {
+    width: 90% !important;
+    height: 350px !important;
+  }
+}

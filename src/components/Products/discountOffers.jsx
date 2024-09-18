@@ -91,7 +91,7 @@ const DiscountOffers = (props) => {
                   </Link>
                   <div className="ml-3 mt-2">
                     <AddToCart
-                      name="Add to Cart"
+                      name={item.stock < 1 ? "Out of stock" : "Add to Cart"}
                       click={handleClick}
                       Disable={item.stock < 1}
                     />
