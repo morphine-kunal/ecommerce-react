@@ -23,7 +23,7 @@ const NavBar = ({ shwoBack }) => {
   };
 
   return (
-    <nav className="bg-[#FFFFFF]">
+    <nav className="bg-[#FFFFFF] z-50">
       <div className="w-[90%] mx-auto bg-[#FFFFFF] h-14 flex justify-between items-center px-3">
         {id || name || shwoBack ? (
           <div
@@ -51,7 +51,7 @@ const NavBar = ({ shwoBack }) => {
             {favItemCount > 0 && (
               <div className="absolute top-0.95 right-0.5 bg-[#ff003c] text-white text-xs font-medium rounded-full w-1.5 h-1.5 flex items-center justify-center"></div>
             )}
-            <Link to={'/profile/wishlist'}>
+            <Link to={"/profile/wishlist"}>
               <IoHeartOutline className="w-5 h-5 cursor-pointer" />
             </Link>
           </div>
